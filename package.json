@@ -1,0 +1,20 @@
+{
+  "name": "svg-themer",
+  "version": "1.0.0",
+  "description": "Apply a theme to SVG elements as well as image data and css rules constructed from SVG markup",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint -c ../fin-hypergrid/.eslintrc index.js",
+    "test": "open test.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joneit/svg-themer.git"
+  },
+  "author": "Jonathan Eiten <jonathan.eiten@mojotouch.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joneit/svg-themer/issues"
+  },
+  "homepage": "https://github.com/joneit/svg-themer#readme"
+}

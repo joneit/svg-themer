@@ -1,0 +1,5 @@
+<svg viewBox="25 25 450 450" width="45" height="45" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="475 350 350 475 150 475 25 350 25 150 150 25 350 25 475 150"></polygon>
+    <path d="M 450 339 L 339 450 L 161 450 L 50 339 L 50 161 L 161 50 L 339 50 L 450 161 Z" style="stroke-width:15px"></path>
+    <text transform="matrix(1, 0, 0, 1.689489, 3.74598, -160.023605)" style="fill: currentColor; font: 140.871px sans-serif; font-weight: bold; letter-spacing: -4.1px;" x="61" y="292">STOP</text>
+</svg>
