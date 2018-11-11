@@ -1,12 +1,13 @@
 {
   "name": "svg-themer",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Apply a theme to SVG elements as well as image data and css rules constructed from SVG markup",
   "main": "index.js",
   "scripts": {
     "lint": "eslint -c ../fin-hypergrid/.eslintrc index.js",
-    "build": "mkdir umd; cp index.js umd/svg-themer.js; uglifyjs index.js > umd/svg-themer.min.js",
-    "test": "open test.html"
+    "build": "mkdir umd 2>/dev/null; cp index.js umd/svg-themer.js; uglifyjs index.js > umd/svg-themer.min.js; ls -lah umd/*.*",
+    "test": "http-server -p 49867 -o index.html # -o is not working for me",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>svg-themer test</title>
+  <script src="index.js"></script>
+  <!--<script src="https://unpkg.com/svg-themer@1.0/umd/svg-themer.js"></script>-->
+  <style>
+    .stop-sign-base64 {
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIyNSAyNSA0NTAgNDUwIiB3aWR0aD0iNDUiIGhlaWdodD0iNDUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBvbHlnb24gcG9pbnRzPSI0NzUgMzUwIDM1MCA0NzUgMTUwIDQ3NSAyNSAzNTAgMjUgMTUwIDE1MCAyNSAzNTAgMjUgNDc1IDE1MCI+PC9wb2x5Z29uPjxwYXRoIGQ9Ik0gNDUwIDMzOSBMIDMzOSA0NTAgTCAxNjEgNDUwIEwgNTAgMzM5IEwgNTAgMTYxIEwgMTYxIDUwIEwgMzM5IDUwIEwgNDUwIDE2MSBaIiBzdHlsZT0ic3Ryb2tlLXdpZHRoOjE1cHgiPjwvcGF0aD48dGV4dCB0cmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAxLjY4OTQ4OSwgMy43NDU5OCwgLTE2MC4wMjM2MDUpIiBzdHlsZT0iZmlsbDogY3VycmVudENvbG9yOyBmb250OiAxNDAuODcxcHggc2Fucy1zZXJpZjsgZm9udC13ZWlnaHQ6IGJvbGQ7IGxldHRlci1zcGFjaW5nOiAtNC4xcHg7IiB4PSI2MSIgeT0iMjkyIj5TVE9QPC90ZXh0Pjwvc3ZnPg==)
+    }
+    .stop-sign-uri {
+      background-image: url("data:image/svg+xml,%3Csvg%20viewBox=%2225%2025%20450%20450%22%20width=%2245%22%20height=%2245%22%20xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cpolygon%20points=%22475%20350%20350%20475%20150%20475%2025%20350%2025%20150%20150%2025%20350%2025%20475%20150%22%3E%3C/polygon%3E%3Cpath%20d=%22M%20450%20339%20L%20339%20450%20L%20161%20450%20L%2050%20339%20L%2050%20161%20L%20161%2050%20L%20339%2050%20L%20450%20161%20Z%22%20style=%22stroke-width:15px%22%3E%3C/path%3E%3Ctext%20transform=%22matrix(1,%200,%200,%201.689489,%203.74598,%20-160.023605)%22%20style=%22fill:%20currentColor;%20font:%20140.871px%20sans-serif;%20font-weight:%20bold;%20letter-spacing:%20-4.1px;%22%20x=%2261%22%20y=%22292%22%3ESTOP%3C/text%3E%3C/svg%3E")
+    }
+    .stop-sign-file {
+      background-image: url("STOP.svg")
+    }
+    .stop-sign-base64, .stop-sign-uri, .stop-sign-file {
+      width: 45px;
+      height: 45px;
+      display: inline-block;
+    }
+    h3 {
+      font-family: monospace
+    }
+    h4 { font: 9pt sans-serif; margin: .3em 0 }
+    h4::after { content: ':' }
+  </style>
+
+</head>
+<body>
+<h3>SVGSVGElement</h3>
+<h4>Assertion</h4>
+<svg viewBox="25 25 450 450" width="45" height="45" xmlns="http://www.w3.org/2000/svg">
+  <polygon points="475 350 350 475 150 475 25 350 25 150 150 25 350 25 475 150"></polygon>
+  <path d="M 450 339 L 339 450 L 161 450 L 50 339 L 50 161 L 161 50 L 339 50 L 450 161 Z" style="stroke-width:15px"></path>
+  <text transform="matrix(1, 0, 0, 1.689489, 3.74598, -160.023605)" style="fill: currentColor; font: 140.871px sans-serif; font-weight: bold; letter-spacing: -4.1px;" x="61" y="292">STOP</text>
+</svg>
+<svg viewBox="25 25 450 450" width="45" height="45" xmlns="http://www.w3.org/2000/svg">
+  <polygon points="475 350 350 475 150 475 25 350 25 150 150 25 350 25 475 150"></polygon>
+  <path d="M 450 339 L 339 450 L 161 450 L 50 339 L 50 161 L 161 50 L 339 50 L 450 161 Z" style="stroke-width:15px"></path>
+  <text transform="matrix(1, 0, 0, 1.689489, 3.74598, -160.023605)" style="fill: currentColor; font: 140.871px sans-serif; font-weight: bold; letter-spacing: -4.1px;" x="61" y="292">STOP</text>
+</svg>
+<svg viewBox="25 25 450 450" width="45" height="45" xmlns="http://www.w3.org/2000/svg">
+  <polygon points="475 350 350 475 150 475 25 350 25 150 150 25 350 25 475 150"></polygon>
+  <path d="M 450 339 L 339 450 L 161 450 L 50 339 L 50 161 L 161 50 L 339 50 L 450 161 Z" style="stroke-width:15px"></path>
+  <text transform="matrix(1, 0, 0, 1.689489, 3.74598, -160.023605)" style="fill: currentColor; font: 140.871px sans-serif; font-weight: bold; letter-spacing: -4.1px;" x="61" y="292">STOP</text>
+</svg>
+<h4>Expectation</h4>
+<img src="STOP-black-on-white.svg">
+<img src="STOP-white-on-red.svg">
+<img src="STOP-white-on-green.svg">
+<h3>HTMLImageElement</h3>
+<h4>Assertion</h4>
+<img title="markup" src='data:image/svg+xml,%3Csvg%20viewBox=%2225%2025%20450%20450%22%20width=%2245%22%20height=%2245%22%20xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cpolygon%20points=%22475%20350%20350%20475%20150%20475%2025%20350%2025%20150%20150%2025%20350%2025%20475%20150%22%3E%3C/polygon%3E%3Cpath%20d=%22M%20450%20339%20L%20339%20450%20L%20161%20450%20L%2050%20339%20L%2050%20161%20L%20161%2050%20L%20339%2050%20L%20450%20161%20Z%22%20style=%22stroke-width:15px%22%3E%3C/path%3E%3Ctext%20transform=%22matrix(1,%200,%200,%201.689489,%203.74598,%20-160.023605)%22%20style=%22fill:%20currentColor;%20font:%20140.871px%20sans-serif;%20font-weight:%20bold;%20letter-spacing:%20-4.1px;%22%20x=%2261%22%20y=%22292%22%3ESTOP%3C/text%3E%3C/svg%3E'>
+<img title="base64" src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIyNSAyNSA0NTAgNDUwIiB3aWR0aD0iNDUiIGhlaWdodD0iNDUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBvbHlnb24gcG9pbnRzPSI0NzUgMzUwIDM1MCA0NzUgMTUwIDQ3NSAyNSAzNTAgMjUgMTUwIDE1MCAyNSAzNTAgMjUgNDc1IDE1MCI+PC9wb2x5Z29uPjxwYXRoIGQ9Ik0gNDUwIDMzOSBMIDMzOSA0NTAgTCAxNjEgNDUwIEwgNTAgMzM5IEwgNTAgMTYxIEwgMTYxIDUwIEwgMzM5IDUwIEwgNDUwIDE2MSBaIiBzdHlsZT0ic3Ryb2tlLXdpZHRoOjE1cHgiPjwvcGF0aD48dGV4dCB0cmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAxLjY4OTQ4OSwgMy43NDU5OCwgLTE2MC4wMjM2MDUpIiBzdHlsZT0iZmlsbDogY3VycmVudENvbG9yOyBmb250OiAxNDAuODcxcHggc2Fucy1zZXJpZjsgZm9udC13ZWlnaHQ6IGJvbGQ7IGxldHRlci1zcGFjaW5nOiAtNC4xcHg7IiB4PSI2MSIgeT0iMjkyIj5TVE9QPC90ZXh0Pjwvc3ZnPg==">
+<img title="mixin" src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIyNSAyNSA0NTAgNDUwIiB3aWR0aD0iNDUiIGhlaWdodD0iNDUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBvbHlnb24gcG9pbnRzPSI0NzUgMzUwIDM1MCA0NzUgMTUwIDQ3NSAyNSAzNTAgMjUgMTUwIDE1MCAyNSAzNTAgMjUgNDc1IDE1MCI+PC9wb2x5Z29uPjxwYXRoIGQ9Ik0gNDUwIDMzOSBMIDMzOSA0NTAgTCAxNjEgNDUwIEwgNTAgMzM5IEwgNTAgMTYxIEwgMTYxIDUwIEwgMzM5IDUwIEwgNDUwIDE2MSBaIiBzdHlsZT0ic3Ryb2tlLXdpZHRoOjE1cHgiPjwvcGF0aD48dGV4dCB0cmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAxLjY4OTQ4OSwgMy43NDU5OCwgLTE2MC4wMjM2MDUpIiBzdHlsZT0iZmlsbDogY3VycmVudENvbG9yOyBmb250OiAxNDAuODcxcHggc2Fucy1zZXJpZjsgZm9udC13ZWlnaHQ6IGJvbGQ7IGxldHRlci1zcGFjaW5nOiAtNC4xcHg7IiB4PSI2MSIgeT0iMjkyIj5TVE9QPC90ZXh0Pjwvc3ZnPg==">
+<img title="file" src="STOP.svg">
+<h4>Expectation</h4>
+<img src="STOP-black-on-white.svg">
+<img src="STOP-white-on-red.svg">
+<img src="STOP-white-on-green.svg">
+<img src="STOP-white-on-red.svg">
+
+<h3>CSSStyleRule</h3>
+<h4>Assertion</h4>
+<span title="base64" class='stop-sign-base64'></span>
+<span title="base64" class='stop-sign-base64'></span>
+<span title="URI-encoded" class='stop-sign-uri'></span>
+<span title="URI-encoded" class='stop-sign-uri'></span>
+<span title="file" class='stop-sign-file'></span>
+<span title="file" class='stop-sign-file'></span>
+<h4>Expectation</h4>
+<img src="STOP-black-on-white.svg">
+<img src="STOP-black-on-white.svg">
+<img src="STOP-white-on-red.svg">
+<img src="STOP-white-on-red.svg">
+<img src="STOP-white-on-green.svg">
+<img src="STOP-white-on-green.svg">
+
+
+<script>
+    var theme = {
+        blackAndWhite: { backgroundColor: 'white', color: 'black' },
+        highwaySignage: { backgroundColor: '#006A4D', color: 'white' }, // Pantone 342
+        stopSignage: { backgroundColor: '#da291c', color: 'white' } // Pantone 485
+    };
+
+    var svg = document.querySelectorAll('svg');
+    svgThemer.setSvgProps.call(svg[0], theme.blackAndWhite);
+    svgThemer.setSvgProps.call(svg[1], theme.stopSignage);
+    svgThemer.mixin(svg[2]).setTheme(theme.highwaySignage);
+
+    var img = Array.prototype.slice.call(document.querySelectorAll('img[src^=data]'));
+    img.push(img[2].nextElementSibling);
+    svgThemer.setImgSvgProps.call(img[0], theme.blackAndWhite);
+    svgThemer.setImgSvgProps.call(img[1], theme.stopSignage);
+    svgThemer.mixin(img[2]).setTheme(theme.highwaySignage);
+    svgThemer.setImgSvgProps.call(img[3], theme.stopSignage);
+
+    var rules = document.querySelector('style').sheet.cssRules;
+    svgThemer.setRuleSvgProps.call(rules[0], theme.blackAndWhite);
+    svgThemer.mixin(rules[1]).setTheme(theme.stopSignage);
+    svgThemer.mixin(rules[2]).setTheme(theme.highwaySignage);
+
+</script>
+</body>
+</html>

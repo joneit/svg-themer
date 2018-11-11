@@ -12,6 +12,8 @@ With `svg-themer` you can theme such objects as easily as actual `<svg>` element
 
 ## Background
 
+> **TL;DR** Skip to [API](#api) with examples.
+
 SVG data is displayed on a web page by the following DOM `Element`s:
 * `SVGSVGElement` — Represented in XML as `<svg>...</svg>` (with descendant elements)
 * `HTMLImageElement` — Represented in HTML as `<img src="filename.svg"/>` or `<img src="data:image/svg+xml...">`
@@ -19,13 +21,22 @@ SVG data is displayed on a web page by the following DOM `Element`s:
 
 An `SVGSVGElement`, along with its descendant elements, picks up cascading style properties (including but not limited to `stroke` and `fill`) from CSS stylesheet rules. This works quite well, albeit at the memory cost of having to deep-clone the entire element everywhere it needs to appear. However, with the memory capacity of today's machines this cost is usually of no concern.
 
-The situation is quite different, however, for `<img/>` elements with underlying SVG data and for any element referencing SVG data via a CSS `url()` function. In these cases applying styles has _no effect_ on the image because it has already been rasterized.
+The situation is quite different, however, for `<img/>` elements with underlying SVG data and for any element referencing SVG data via a CSS `url()` function. In these cases applying styles has _no effect_ on the image because it has already been rasterized. **With this module, you can apply a set of thematic styles directly to such SVG data.**
 
-**With this module, you can apply a set of thematic styles directly to such SVG data.**
+## Data encoding
+This module properly handles all flavors of SVG data:
+Entity | SVG Data Source | Example
+------ | --------------- | -------
+`HTMLImageElement` object | GET request | `<img src="yourfile.svg">`
+`HTMLImageElement` object | in-line, raw (unencoded) | `<img src="data:image/svg+xml,...">`
+`HTMLImageElement` object | in-line, base64-encoded | `<img src="data:image/svg+xml;base64,...">`
+`CSSStyleRule` property | GET request | `background-image: url(yourfile.svg)`
+`CSSStyleRule` property | in-line, URI-encoded | `background-image: url(data:image/svg+xml,...)`
+`CSSStyleRule` property | in-line, base64-encoded | `background-image: url(data:image/svg+xml;base64,...)`
 
-> **IMPORTANT NOTE:** For this to work, the SVG data must be "baked-in" to the object using `data:image/svg+xml`; this version does not handle file URLs.
+> **Note:** Data in CSS `url()` constructs must always be encoded. (FYI, base64 encoding produces shorter results.)
 
-> **Data encoding:** This module properly handles both unencoded data (`data:image/svg+xml,` + raw SVG markup) as well as base64-encoded data (`data:image/svg+xml;base64,` + encoded string). If you experience any issues trying to use unencoded SVG markup directly (such as nested quotes), you can always encode it.
+> **Note:** Some browsers (looking at you, IE11) require `HTMLImageElement#src` to be encoded as well, depending on the content. For this reason, formerly unencoded data is always URI-encoded on write-back to `src` after styling as the content is now indeterminate.
 
 ## `theme` objects
 
@@ -53,8 +64,8 @@ var svgThemer = require('svg-themer');
 ```
 Access UMD module (one of the following):
 ```html
-<script src="https://unpkg.com/svg-themer@1.0/umd/svg-themer.js"></script>
-<script src="https://unpkg.com/svg-themer@1.0/umd/svg-themer.min.js"></script>
+<script src="https://unpkg.com/svg-themer/umd/svg-themer.js"></script>
+<script src="https://unpkg.com/svg-themer/umd/svg-themer.min.js"></script>
 ```
 
 ### `svgThemer.setSvgProps(theme)`
@@ -137,7 +148,7 @@ Themes an SVG style rule property. Similar to calling `setSvgProps` on an `<svg>
 </body>
 ```
 ```js
-var rule = document.querySelector('style').sheet.rules[0]; // first rule in first stylesheet
+var rule = document.querySelector('style').sheet.cssRules[0]; // first rule in first stylesheet
 svgThemer.setRuleSvgProps.call(rule, theme.stopSignage);
 ```
 In this case, all referencing elements are themed simultaneously:
@@ -164,7 +175,7 @@ The method returns the object for chaining.
 ```js
 var svgEl = document.querySelector('svg');
 var imgEl = document.querySelector('img');
-var rule = document.querySelector('style').sheet.rules[0]; // first rule in first stylesheet
+var rule = document.querySelector('style').sheet.cssRules[0]; // first rule in first stylesheet
 
 svgThemer.mixin(svgEl, propSetter);
 svgThemer.mixin(imgEl, propSetter);
@@ -188,3 +199,19 @@ svgThemer.mixin(object).setTheme(theme);
 var imgEl = svgThemer.mixin(document.querySelector('img')).setTheme(theme);
 ```
 
+## UAT
+Tested in the following browsers:
+* macOS 10.13.6 (17G65)
+   * Chrome 70.0.3538.77
+   * Safari 12.0 (13606.2.11)
+   * Opera 56.0.3051.102
+   * Firefox 63.0.1
+* Windows 10
+   * Chrome 70.0.3538.77
+   * Opera 56.0.3051.70
+   * Firefox 63.0.0.6865
+   * Edge 42.17134.1.0
+   * Internet Explorer 11.345.17134.0 (Update 11.0.90)
+
+## Version History
+See [releases](https://github.com/joneit/svg-themer/releases).
