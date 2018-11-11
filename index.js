@@ -5,13 +5,13 @@
 var PATTERN = '((data:image/svg\\+xml)(;\\w+)?(,)(.*)|(.*\\.svg))';
 var regexDataSvg64 = new RegExp('^()' + PATTERN + '()$');
 var regexUrlDataSvg64 = new RegExp('^(url\\(")' + PATTERN + '("\\))$');
-var WHOLE_MATCH_INDEX = 0,
-    URL_CONSTRUCT_INDEX = 1,
-    URI_MATCH_INDEX = 2,
-    SCHEME_INDEX = 3,
-    ENCODING_MATCH_INDEX = 4,
-    DATA_MATCH_INDEX = 6,
-    SVG_FILE_URL_INDEX = 7;
+var MATCH_INDEX_WHOLE = 0,
+    MATCH_INDEX_URI = 2,
+    MATCH_INDEX_SCHEME = 3,
+    MATCH_INDEX_ENCODING = 4,
+    MATCH_INDEX_COMMA = 5,
+    MATCH_INDEX_DATA = 6,
+    MATCH_INDEX_SVG_FILE_URL = 7;
 var propsUsingImageUrl = ['background-image', 'list-style-image', 'border-image', 'content'];
 
 // UMD accommodation
@@ -77,11 +77,14 @@ api.setRuleSvgProps = function(theme, setSvgProps, propName) {
 
 function applyThemeToSvgData(match, theme, setSvgProps, callback) {
     var self = this;
-    if (match[SVG_FILE_URL_INDEX]) {
-        get(match[SVG_FILE_URL_INDEX], function(svgMarkup) {
-            match[SCHEME_INDEX] = 'data:image/svg+xml,';
-            match[DATA_MATCH_INDEX] = svgMarkup;
-            match[SVG_FILE_URL_INDEX] = '';
+    if (match[MATCH_INDEX_SVG_FILE_URL]) {
+        get(match[MATCH_INDEX_SVG_FILE_URL], function(svgMarkup) {
+            // write back file data to object base64-encoded
+            match[MATCH_INDEX_SCHEME] = 'data:image/svg+xml';
+            match[MATCH_INDEX_ENCODING] = ';base64';
+            match[MATCH_INDEX_COMMA] = ',';
+            match[MATCH_INDEX_DATA] = svgMarkup;
+            match[MATCH_INDEX_SVG_FILE_URL] = '';
             applyNow.call(self, match, theme, setSvgProps, callback);
         });
     } else {
@@ -105,8 +108,8 @@ function get(url, callback) {
 }
 
 function applyNow(match, theme, setSvgProps, callback) {
-    var encoding = match[ENCODING_MATCH_INDEX];
-    var data = match[DATA_MATCH_INDEX];
+    var encoding = match[MATCH_INDEX_ENCODING];
+    var data = match[MATCH_INDEX_DATA];
     var div = document.createElement('div');
 
     setSvgProps = setSvgProps || this.setSvgProps || api.setSvgProps;
@@ -116,19 +119,19 @@ function applyNow(match, theme, setSvgProps, callback) {
             div.innerHTML = data.indexOf('%3C') >= 0 ? decodeURIComponent(data) : data;
             setSvgProps.call(div.firstElementChild, theme);
             var svgMarkup = (new XMLSerializer()).serializeToString(div.firstElementChild);
-            match[DATA_MATCH_INDEX] = encodeURIComponent(svgMarkup); // always encode result for IE11's sake
+            match[MATCH_INDEX_DATA] = encodeURIComponent(svgMarkup); // always encode result for IE11's sake
             break;
         case ';base64':
-            div.innerHTML = atob(data);
+            div.innerHTML = data.indexOf('<') < 0 ? atob(data) : data;
             setSvgProps.call(div.firstElementChild, theme);
             var svgMarkup = (new XMLSerializer()).serializeToString(div.firstElementChild);
-            match[DATA_MATCH_INDEX] = btoa(svgMarkup);
+            match[MATCH_INDEX_DATA] = btoa(svgMarkup);
             break;
         default:
             throw new TypeError('Unexpected encoding "' + encoding + '"');
     }
 
-    match[WHOLE_MATCH_INDEX] = match[URI_MATCH_INDEX] = undefined; // omit from join
+    match[MATCH_INDEX_WHOLE] = match[MATCH_INDEX_URI] = undefined; // omit from join
     callback.call(this, match.join(''));
 }
 
