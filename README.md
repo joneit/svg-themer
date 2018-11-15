@@ -148,7 +148,7 @@ Themes an SVG style rule property. Similar to calling `setSvgProps` on an `<svg>
 </body>
 ```
 ```js
-var rule = document.querySelector('style').sheet.cssRules[0]; // first rule in first stylesheet
+var rule = document.styleSheets[0].cssRules[0]; // first rule in first stylesheet
 svgThemer.setRuleSvgProps.call(rule, theme.stopSignage);
 ```
 In this case, all referencing elements are themed simultaneously:
@@ -175,7 +175,7 @@ The method returns the object for chaining.
 ```js
 var svgEl = document.querySelector('svg');
 var imgEl = document.querySelector('img');
-var rule = document.querySelector('style').sheet.cssRules[0]; // first rule in first stylesheet
+var rule = document.styleSheets[0].cssRules[0]; // first rule in first stylesheet
 
 svgThemer.mixin(svgEl, propSetter);
 svgThemer.mixin(imgEl, propSetter);

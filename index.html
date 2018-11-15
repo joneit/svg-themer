@@ -98,7 +98,7 @@
     svgThemer.mixin(img[2]).setTheme(theme.highwaySignage);
     svgThemer.setImgSvgProps.call(img[3], theme.stopSignage);
 
-    var rules = document.querySelector('style').sheet.cssRules;
+    var rules = document.styleSheets[0].cssRules;
     svgThemer.setRuleSvgProps.call(rules[0], theme.blackAndWhite);
     svgThemer.mixin(rules[1]).setTheme(theme.stopSignage);
     svgThemer.mixin(rules[2]).setTheme(theme.highwaySignage);

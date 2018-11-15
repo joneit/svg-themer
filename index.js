@@ -12,7 +12,6 @@ var MATCH_INDEX_WHOLE = 0,
     MATCH_INDEX_COMMA = 5,
     MATCH_INDEX_DATA = 6,
     MATCH_INDEX_SVG_FILE_URL = 7;
-var propsUsingImageUrl = ['background-image', 'list-style-image', 'border-image', 'content'];
 
 // UMD accommodation
 var api;
@@ -21,6 +20,14 @@ if (typeof exports === 'undefined') {
 } else {
     api = exports;
 }
+
+// List of CSS properties accepting url(...) construct for image files (may be incomplete):
+api.cssImagePropertyNames = [
+    'background-image',
+    'list-style-image',
+    'border-image',
+    'content'
+];
 
 // prop setter "standard implementation"; override as needed
 api.setSvgProps = function(theme) {
@@ -56,10 +63,10 @@ api.setRuleSvgProps = function(theme, setSvgProps, propName) {
     if (propName) {
         matchProp(propName);
     } else {
-        // propName = propsUsingImageUrl.find(matchProp);
+        // propName = api.cssImagePropertyNames.find(matchProp);
         // avoiding .find() for IE11's sake
-        for (var i = 0; i < propsUsingImageUrl.length; ++i) {
-            propName = propsUsingImageUrl[i];
+        for (var i = 0; i < api.cssImagePropertyNames.length; ++i) {
+            propName = api.cssImagePropertyNames[i];
             if (matchProp(propName)) {
                 break;
             }
