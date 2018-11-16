@@ -199,6 +199,9 @@ svgThemer.mixin(object).setTheme(theme);
 var imgEl = svgThemer.mixin(document.querySelector('img')).setTheme(theme);
 ```
 
+### `cssImagePropertyNames`
+This string array is a list of CSS style properties known to accept image data in a `url(...)` construct. If `propName` parameter is not provided in above calls, this list is scanned and the operation targets the first such property found in the given CSS rule. You can augment or replace this list as needed (although I believe it is complete as is).
+
 ## UAT
 Tested in the following browsers:
 * macOS 10.13.6 (17G65)
